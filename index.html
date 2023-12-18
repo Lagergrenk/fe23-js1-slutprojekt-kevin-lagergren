@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <!--JQuery CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script type="module" src="./modules/main.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+
+      <nav class="nav">
+        <h1 class="header__title">TMDB</h1>
+        <ul class="nav__list">
+
+          <!-- Film -->
+          <li class="nav__item">Filmer
+            <ul class="nav__sublist">
+              <li class="nav__subitem">Populära</li>
+              <li class="nav__subitem">Topprankade</li>
+            </ul>
+          </li>
+
+          <!-- Tv-serier -->
+          <li class="nav__item">Tv-serier
+            <ul class="nav__sublist">
+              <li class="nav__subitem">Populära</li>
+              <li class="nav__subitem">Topprankade</li>
+            </ul>
+          </li>
+
+          <!-- Personer -->
+          <li class="nav__item">Personer
+            <ul class="nav__sublist">
+              <li class="nav__subitem">Populära</li>
+            </ul>
+          </li>
+      </nav>
+    </header>
+    <main class="main">
+        <section class="main__content">
+          <div class="main__title">          
+            <h2>Välkommen</h2>
+            <h3>Sök efter filmer, tv-serier eller personer</h3>
+          </div>
+
+          <form action="" class="main__search">
+            <label>
+            <input type="text" name="search" placeholder="Sök här" autocomplete="off">
+          </label>
+          <input type="button" value="Search">
+          </form>
+        </section>
+      </div>
+
+    </main>
+    <footer></footer>
+  </body>
+</html>
