@@ -1,5 +1,6 @@
 import { showSublist, hideSublist } from "./ui.js";
-import { searchMovie } from "./api.js";
+import { getMovies, getActors } from "./api.js";
+import { displayError, displayMovieList, displayActorList } from "./ui.js";
 
 function setupHoverNav() {
   $(".nav__item").hover(
@@ -18,8 +19,12 @@ function setupMovieSearch() {
   $(".search-button").click(async function () {
     const searchInput = $(".search-input").val();
     try {
-      const movies = await searchMovie(searchInput);
-      console.log(movies);
+      const movies = await getMovies(searchInput);
+      const actor = await getActors(searchInput);
+      if (movies.lenght === 0 && actor.lenght === 0) {
+        displayError("No results found");
+      }
+      displayActorList(actor);
     } catch (error) {
       console.log(error);
     }
