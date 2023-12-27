@@ -13,7 +13,7 @@
   height: 64px;
 }
 
-.header__title {
+.nav__title {
   font-size: 24px;
   font-weight: bold;
   margin-right: 20px;
@@ -21,7 +21,6 @@
 
 .nav {
   display: flex;
-
   align-items: center;
 }
 .nav__list {
@@ -52,12 +51,87 @@
 
 .nav__subitem {
   padding: 10px 20px;
-  border-bottom: 1px solid #e5e5e5;
+  cursor: pointer;
 }
 
+.nav__subitem:hover {
+  background-color: #ddd;
+  border-radius: 10px;
+}
 .main__content {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.main__actor-list,
+.main__movie-list,
+.main__tv-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  height: 600px;
+  margin: 15px;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-body::-webkit-scrollbar {
+  display: none;
+}
+.card-body:hover::-webkit-scrollbar {
+  display: block;
+  width: 10px;
+}
+.card-body::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+  border: 2px solid #f5f5f5;
+}
+.card-body::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.card-title {
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.card-subtitle {
+  margin-bottom: 15px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.card-text {
+  margin-bottom: 15px;
+  font-size: 0.9em;
 }

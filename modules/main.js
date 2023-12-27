@@ -1,6 +1,7 @@
-import { setupHoverNav, setupMovieSearch } from "./eventlistner.js";
+import * as eventlistner from "./eventlistner.js";
 
 $(document).ready(function () {
-  setupHoverNav();
-  setupMovieSearch();
+  eventlistner.setupHoverNav();
+  eventlistner.setupMovieSearch();
+  eventlistner.setupPopular(".nav__subitem");
 });
