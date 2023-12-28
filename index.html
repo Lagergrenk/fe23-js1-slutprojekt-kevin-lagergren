@@ -17,6 +17,9 @@
       <nav class="nav">
         <h1 class="nav__title">TMDB</h1>
         <ul class="nav__list">
+          <!-- Hem -->
+          <li class="nav__item" data-type="home">Hem</li>
+
 
           <!-- Film -->
           <li class="nav__item">Filmer
@@ -42,21 +45,21 @@
           </li>
       </nav>
     </header>
-    <main class="main">
+    <main class="main"> 
+      <div class="main__search-container">
+        <div class="main__title">          
+          <h2>Välkommen</h2>
+          <h3>Sök efter filmer, tv-serier eller personer</h3>
+        </div>
+      <form action="" class="main__search">
+        <label>
+          <input type="text" name="search" placeholder="Sök här" autocomplete="off" class="main__search-input">
+        </label>
+        <input type="button" value="Search" class="main__search-button">
+      </form>
+    </div>
         <section class="main__content">
-          <div class="main__search-container">
-            <div class="main__title">          
-              <h2>Välkommen</h2>
-              <h3>Sök efter filmer, tv-serier eller personer</h3>
-            </div>
-
-            <form action="" class="main__search">
-              <label>
-                <input type="text" name="search" placeholder="Sök här" autocomplete="off" class="main__search-input">
-              </label>
-              <input type="button" value="Search" class="main__search-button">
-            </form>
-          </div>
+         
         </section>
         
       </div>

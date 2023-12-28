@@ -58,7 +58,9 @@
   background-color: #ddd;
   border-radius: 10px;
 }
-.main__content {
+.main,
+.main__content,
+.main__search-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -87,7 +89,9 @@
   cursor: pointer;
 }
 
-.card:hover {
+.card:hover,
+.main__movie-results:hover,
+.main__actor-results:hover {
   transform: scale(1.05);
 }
 
@@ -134,4 +138,37 @@
 .card-text {
   margin-bottom: 15px;
   font-size: 0.9em;
+}
+
+.main__movie-results,
+.main__actor-results {
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+}
+
+.main__title {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Style for the lists */
+.main__movie-list,
+.main__actor-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.main__movie-total,
+.main__actor-total {
+  font-size: 1em;
+  color: #666;
+  margin-top: 10px;
+  text-align: right;
 }

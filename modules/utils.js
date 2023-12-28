@@ -1,9 +1,4 @@
-export function createElemAndAppend(tag, className, parentSelector) {
-  const $el = $(`<${tag}>`, { class: className });
-  $(parentSelector).append($el);
-  return $el;
-}
-
+// Create a card and append it to the parentSelector
 export function createCardAndAppend(parentSelector, data, type, imgPath) {
   const $parent = $(parentSelector);
   const $card = createElemAndAppend("div", "card", $parent);
@@ -15,27 +10,17 @@ export function createCardAndAppend(parentSelector, data, type, imgPath) {
   const $cardImg = createElemAndAppend("img", "card-img-top", $link);
 
   // Delegate to specific helper functions based on type
-  switch (type) {
-    case "movie":
-      movie($card, data);
-      $cardImg.attr("src", `${imgPath}/${data.poster_path}`);
-      $cardImg.attr("alt", data.title || data.name);
-      break;
-    case "tv":
-      tv($card, data);
-      $cardImg.attr("src", `${imgPath}/${data.poster_path}`);
-      $cardImg.attr("alt", data.title || data.name);
-      break;
-    case "person":
-      actor($card, data);
-      $cardImg.attr("src", `${imgPath}/${data.profile_path}`);
-      $cardImg.attr("alt", data.name);
-      break;
-  }
+  MovieTvOrPerson($card, $cardImg, data, type, imgPath);
 
   return $card;
 }
 
+export function createElemAndAppend(tag, className, parentSelector) {
+  const $el = $(`<${tag}>`, { class: className });
+  $(parentSelector).append($el);
+  return $el;
+}
+//------------------ Helper functions ------------------//
 function movie($card, data) {
   const $cardBody = createElemAndAppend("div", "card-body", $card);
   createElemAndAppend("h5", "card-title", $cardBody).text(data.title);
@@ -68,5 +53,24 @@ function actor($card, data) {
     createElemAndAppend("p", "card-text", $cardBody).text(
       `${mediaType}: ${titleOrName}`
     );
+  }
+}
+function MovieTvOrPerson($card, $cardImg, data, type, imgPath) {
+  switch (type) {
+    case "movie":
+      movie($card, data);
+      $cardImg.attr("src", `${imgPath}/${data.poster_path}`);
+      $cardImg.attr("alt", data.title || data.name);
+      break;
+    case "tv":
+      tv($card, data);
+      $cardImg.attr("src", `${imgPath}/${data.poster_path}`);
+      $cardImg.attr("alt", data.title || data.name);
+      break;
+    case "person":
+      actor($card, data);
+      $cardImg.attr("src", `${imgPath}/${data.profile_path}`);
+      $cardImg.attr("alt", data.name);
+      break;
   }
 }

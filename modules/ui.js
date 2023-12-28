@@ -43,3 +43,30 @@ export function displayActor() {
   //Known for
   //list of movies and tv shows
 }
+
+export function displaySearchResults(movies, actors) {
+  $mainContent.empty();
+  //Display movies
+  const $movieResults = createElemAndAppend(
+    "div",
+    "main__movie-results",
+    $mainContent
+  );
+  createElemAndAppend("h2", "main__title", $movieResults).text("Movies");
+  createElemAndAppend("div", "main__movie-list", $movieResults);
+  createElemAndAppend("div", "main__movie-total", $movieResults).text(
+    `Total movies found: ${movies.length}`
+  );
+
+  //Display actors
+  const $actorResults = createElemAndAppend(
+    "div",
+    "main__actor-results",
+    $mainContent
+  );
+  createElemAndAppend("h2", "main__title", $actorResults).text("Actors");
+  createElemAndAppend("div", "main__actor-list", $actorResults);
+  createElemAndAppend("div", "main__actor-total", $actorResults).text(
+    `Total actors found: ${actors.length}`
+  );
+}

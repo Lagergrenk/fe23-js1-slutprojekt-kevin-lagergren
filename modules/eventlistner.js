@@ -20,11 +20,13 @@ export function setupMovieSearch() {
     const searchInput = $(".main__search-input").val();
     try {
       const movies = await api.getSearch("movie", searchInput);
-      const actor = await api.getSearch("actor", searchInput);
+      const actor = await api.getSearch("person", searchInput);
       if (movies.lenght === 0 && actor.lenght === 0) {
         displayError("No results found");
       }
-      displayActorList(actor);
+      console.log(movies);
+      console.log(actor);
+      ui.displaySearchResults(movies, actor);
     } catch (error) {
       console.log(error);
     }
@@ -33,31 +35,39 @@ export function setupMovieSearch() {
 
 // "buttons" works as a selector for the buttons that should be clicked
 // Todo: Add functionality to the buttons
-export function setupPopular(clickedBtn) {
+export function setupList(clickedBtn) {
   $(clickedBtn).click(async function () {
     const type = $(this).data("type");
-
-    switch (type) {
-      case "popular-movies":
-        const movies = await api.getPopular("movie");
-        ui.displayItemList(movies, "movie", ".main__content", "movie");
-        break;
-      case "popular-actors":
-        const actors = await api.getPopular("person");
-        ui.displayItemList(actors, "actor", ".main__content", "person");
-        break;
-      case "popular-tvshows":
-        const tvshows = await api.getPopular("tv");
-        ui.displayItemList(tvshows, "tv", ".main__content", "tv");
-        break;
-      case "top-rated-movies":
-        const topRatedMovies = await api.getTopRated("movie");
-        ui.displayItemList(topRatedMovies, "movie", ".main__content", "movie");
-        break;
-      case "top-rated-tvshows":
-        const topRatedTvshows = await api.getTopRated("tv");
-        ui.displayItemList(topRatedTvshows, "tv", ".main__content", "tv");
-        break;
+    try {
+      switch (type) {
+        case "popular-movies":
+          const movies = await api.getPopular("movie");
+          ui.displayItemList(movies, "movie", ".main__content", "movie");
+          break;
+        case "popular-actors":
+          const actors = await api.getPopular("person");
+          ui.displayItemList(actors, "actor", ".main__content", "person");
+          break;
+        case "popular-tvshows":
+          const tvshows = await api.getPopular("tv");
+          ui.displayItemList(tvshows, "tv", ".main__content", "tv");
+          break;
+        case "top-rated-movies":
+          const topRatedMovies = await api.getTopRated("movie");
+          ui.displayItemList(
+            topRatedMovies,
+            "movie",
+            ".main__content",
+            "movie"
+          );
+          break;
+        case "top-rated-tvshows":
+          const topRatedTvshows = await api.getTopRated("tv");
+          ui.displayItemList(topRatedTvshows, "tv", ".main__content", "tv");
+          break;
+      }
+    } catch (error) {
+      console.log(error);
     }
   });
 }
