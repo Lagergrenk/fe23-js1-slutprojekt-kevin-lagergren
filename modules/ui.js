@@ -30,21 +30,8 @@ export function displayItemList(items, itemType, parentSelector, type) {
     createCardAndAppend($itemList, item, type, IMAGE_URL);
   });
 }
-export function displayMovie() {
-  //Image
-  //title
-  //release date
-  //overview
-}
 
-export function displayActor() {
-  //Image
-  //name
-  //Known for
-  //list of movies and tv shows
-}
-
-export function displaySearchResults(movies, actors) {
+export function displaySearchResults(movies, actors, tv) {
   $mainContent.empty();
   //Display movies
   const $movieResults = createElemAndAppend(
@@ -55,7 +42,7 @@ export function displaySearchResults(movies, actors) {
   createElemAndAppend("h2", "main__title", $movieResults).text("Movies");
   createElemAndAppend("div", "main__movie-list", $movieResults);
   createElemAndAppend("div", "main__movie-total", $movieResults).text(
-    `Total movies found: ${movies.length}`
+    `Totalt hittade filmer: ${movies.length}`
   );
 
   //Display actors
@@ -67,6 +54,18 @@ export function displaySearchResults(movies, actors) {
   createElemAndAppend("h2", "main__title", $actorResults).text("Actors");
   createElemAndAppend("div", "main__actor-list", $actorResults);
   createElemAndAppend("div", "main__actor-total", $actorResults).text(
-    `Total actors found: ${actors.length}`
+    `Totalt hittade skådespelare: ${actors.length}`
+  );
+
+  //Display tv shows
+  const $tvResults = createElemAndAppend(
+    "div",
+    "main__tv-results",
+    $mainContent
+  );
+  createElemAndAppend("h2", "main__title", $tvResults).text("TV Shows");
+  createElemAndAppend("div", "main__tv-list", $tvResults);
+  createElemAndAppend("div", "main__tv-total", $tvResults).text(
+    `Totalt hittade tv-serier: ${tv.length}`
   );
 }

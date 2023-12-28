@@ -15,18 +15,20 @@ export function setupHoverNav() {
   );
 }
 
-export function setupMovieSearch() {
+export function setupSearch() {
   $(".main__search-button").click(async function () {
     const searchInput = $(".main__search-input").val();
     try {
       const movies = await api.getSearch("movie", searchInput);
       const actor = await api.getSearch("person", searchInput);
+      const tv = await api.getSearch("tv", searchInput);
       if (movies.lenght === 0 && actor.lenght === 0) {
         displayError("No results found");
       }
       console.log(movies);
       console.log(actor);
-      ui.displaySearchResults(movies, actor);
+      console.log(tv);
+      ui.displaySearchResults(movies, actor, tv);
     } catch (error) {
       console.log(error);
     }

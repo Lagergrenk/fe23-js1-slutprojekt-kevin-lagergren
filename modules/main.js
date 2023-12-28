@@ -2,6 +2,6 @@ import * as eventlistner from "./eventlistner.js";
 
 $(document).ready(function () {
   eventlistner.setupHoverNav();
-  eventlistner.setupMovieSearch();
+  eventlistner.setupSearch();
   eventlistner.setupList(".nav__subitem");
 });
