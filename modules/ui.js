@@ -33,39 +33,42 @@ export function displayItemList(items, itemType, parentSelector, type) {
 
 export function displaySearchResults(movies, actors, tv) {
   $mainContent.empty();
+
+  const $searchResults = createElemAndAppend(
+    "div",
+    "main__search-results",
+    $mainContent
+  );
   //Display movies
   const $movieResults = createElemAndAppend(
     "div",
     "main__movie-results",
-    $mainContent
+    $searchResults
   );
   createElemAndAppend("h2", "main__title", $movieResults).text("Movies");
-  createElemAndAppend("div", "main__movie-list", $movieResults);
   createElemAndAppend("div", "main__movie-total", $movieResults).text(
-    `Totalt hittade filmer: ${movies.length}`
+    `Totalt found: ${movies.length}`
   );
 
   //Display actors
   const $actorResults = createElemAndAppend(
     "div",
     "main__actor-results",
-    $mainContent
+    $searchResults
   );
   createElemAndAppend("h2", "main__title", $actorResults).text("Actors");
-  createElemAndAppend("div", "main__actor-list", $actorResults);
   createElemAndAppend("div", "main__actor-total", $actorResults).text(
-    `Totalt hittade skådespelare: ${actors.length}`
+    `Total found: ${actors.length}`
   );
 
   //Display tv shows
   const $tvResults = createElemAndAppend(
     "div",
     "main__tv-results",
-    $mainContent
+    $searchResults
   );
   createElemAndAppend("h2", "main__title", $tvResults).text("TV Shows");
-  createElemAndAppend("div", "main__tv-list", $tvResults);
   createElemAndAppend("div", "main__tv-total", $tvResults).text(
-    `Totalt hittade tv-serier: ${tv.length}`
+    `Total found: ${tv.length}`
   );
 }
