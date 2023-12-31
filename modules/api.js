@@ -14,6 +14,9 @@ async function getDataFromApi(endpoint) {
     // Todo: Implement error handling
     throw new Error(response.statusText);
   }
+  if (response.ok && response.status === 404) {
+    //todo: Implement error handling for 404 not found
+  }
   const data = await response.json();
   return data.results;
 }
