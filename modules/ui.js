@@ -29,7 +29,9 @@ export function displayItemList(items, itemType, parentSelector, type, title) {
   const $parent = $(parentSelector);
   $parent.empty();
   const $title = utils.createElemAndAppend("h2", "main__title", $parent);
-  $title.text(title);
+  if (title) {
+    $title.text(title);
+  }
   const $itemList = utils.createElemAndAppend(
     "div",
     `main__${itemType}-list`,

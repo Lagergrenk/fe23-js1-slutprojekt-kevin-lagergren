@@ -2,19 +2,7 @@ import { showSublist, hideSublist } from "./ui.js";
 import * as api from "./api.js";
 import * as ui from "./ui.js";
 
-export function setupHoverNav() {
-  $(".nav__item").hover(
-    function () {
-      const sublist = $(this).find(".nav__sublist");
-      showSublist(sublist);
-    },
-    function () {
-      const sublist = $(this).find(".nav__sublist--hover-visible");
-      hideSublist(sublist);
-    }
-  );
-}
-
+// Search for movies, persons and tv-shows
 export function setupSearch() {
   $(".main__search-button").click(async function () {
     const searchInput = $(".main__search-input").val();
@@ -22,10 +10,16 @@ export function setupSearch() {
       const movies = await api.getSearch("movie", searchInput);
       const person = await api.getSearch("person", searchInput);
       const tv = await api.getSearch("tv", searchInput);
-      if (movies.lenght === 0 && person.lenght === 0) {
-        displayError("No results found");
-      }
       ui.displaySearchResults(movies, person, tv);
+      $(".main__movie-results").click(() =>
+        ui.displayItemList(movies, "movie", ".main__content", "movie")
+      );
+      $(".main__person-results").click(() =>
+        ui.displayItemList(person, "person", ".main__content", "person")
+      );
+      $(".main__tv-results").click(() =>
+        ui.displayItemList(tv, "tv", ".main__content", "tv")
+      );
     } catch (error) {
       console.log(error);
     }

@@ -39,7 +39,7 @@
   display: none;
 }
 
-.nav__sublist--hover-visible {
+.nav__item:hover .nav__sublist {
   display: block;
   width: fit-content;
   border-radius: 10px;
@@ -52,6 +52,7 @@
 .nav__subitem {
   padding: 10px 20px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .nav__subitem:hover {
