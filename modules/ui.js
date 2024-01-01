@@ -8,7 +8,7 @@ TODO:
 
  */
 
-import { createElemAndAppend, createCardAndAppend } from "./utils.js";
+import * as utils from "./utils.js";
 
 //Global Variables
 const $mainContent = $(".main__content");
@@ -25,68 +25,67 @@ export function hideSublist(elem) {
 }
 // Display the list of items in cards in the main content
 // items: array of items to display
-export function displayItemList(items, itemType, parentSelector, type) {
+export function displayItemList(items, itemType, parentSelector, type, title) {
   const $parent = $(parentSelector);
   $parent.empty();
-  const $title = createElemAndAppend("h2", "main__title", $parent);
-  $title.text(itemType.toUpperCase());
-  const $itemList = createElemAndAppend(
+  const $title = utils.createElemAndAppend("h2", "main__title", $parent);
+  $title.text(title);
+  const $itemList = utils.createElemAndAppend(
     "div",
     `main__${itemType}-list`,
     parentSelector
   );
   const slicedItems = items.slice(0, 10);
-
   slicedItems.forEach((item) => {
-    const $card = createCardAndAppend($itemList, item, type, IMAGE_URL);
+    const $card = utils.createCardAndAppend($itemList, item, type, IMAGE_URL);
     const $cardImg = $card.find(".card-img-top");
     MovieTvOrPerson($card, $cardImg, item, type, IMAGE_URL);
   });
 }
 
-export function displaySearchResults(movies, actors, tv) {
+export function displaySearchResults(movies, persons, tv) {
   $mainContent.empty();
 
-  const $searchResults = createElemAndAppend(
+  if (
+    !utils.isPopulatedArray(movies) &&
+    !utils.isPopulatedArray(persons) &&
+    !utils.isPopulatedArray(tv)
+  ) {
+    utils
+      .createElemAndAppend("h2", "main__title", $mainContent)
+      .text("No results found");
+    return;
+  }
+
+  const $searchResults = utils.createElemAndAppend(
     "div",
     "main__search-results",
     $mainContent
   );
-  //Display movies
-  const $movieResults = createElemAndAppend(
-    "div",
-    "main__movie-results",
-    $searchResults
-  );
-  createElemAndAppend("h2", "main__title", $movieResults).text("Movies");
-  createElemAndAppend("div", "main__movie-total", $movieResults).text(
-    `Totalt found: ${movies.length}`
-  );
 
-  //Display actors
-  const $actorResults = createElemAndAppend(
-    "div",
-    "main__actor-results",
-    $searchResults
-  );
-  createElemAndAppend("h2", "main__title", $actorResults).text("Actors");
-  createElemAndAppend("div", "main__actor-total", $actorResults).text(
-    `Total found: ${actors.length}`
-  );
-
-  //Display tv shows
-  const $tvResults = createElemAndAppend(
-    "div",
-    "main__tv-results",
-    $searchResults
-  );
-  createElemAndAppend("h2", "main__title", $tvResults).text("TV Shows");
-  createElemAndAppend("div", "main__tv-total", $tvResults).text(
-    `Total found: ${tv.length}`
-  );
+  displayCategoryResults("Movies", "movie", movies, $searchResults);
+  displayCategoryResults("Persons", "person", persons, $searchResults);
+  displayCategoryResults("Tv-Shows", "tv", tv, $searchResults);
 }
 
 //------------------ Helper functions ------------------//
+
+function displayCategoryResults(title, categoryName, data, $parentElement) {
+  if (!utils.isPopulatedArray(data)) {
+    return;
+  }
+
+  const categoryResults = utils.createElemAndAppend(
+    "div",
+    `main__${categoryName}-results`,
+    $parentElement
+  );
+
+  utils.createElemAndAppend("h2", "main__title", categoryResults).text(title);
+  utils
+    .createElemAndAppend("div", `main__${categoryName}-total`, categoryResults)
+    .text(`Total found: ${data.length}`);
+}
 
 //Checks if the item is a movie, tv or person and calls the appropriate helper-function
 function MovieTvOrPerson($card, $cardImg, data, type, imgPath) {
@@ -109,36 +108,36 @@ function MovieTvOrPerson($card, $cardImg, data, type, imgPath) {
   }
 }
 function movie($card, data) {
-  const $cardBody = createElemAndAppend("div", "card-body", $card);
-  createElemAndAppend("h5", "card-title", $cardBody).text(data.title);
-  createElemAndAppend("p", "card-subtitle", $cardBody).text(
-    `Release date: ${data.release_date}`
-  );
-  createElemAndAppend("p", "card-text", $cardBody).text(data.overview);
+  const $cardBody = utils.createElemAndAppend("div", "card-body", $card);
+  utils.createElemAndAppend("h5", "card-title", $cardBody).text(data.title);
+  utils
+    .createElemAndAppend("p", "card-subtitle", $cardBody)
+    .text(`Release date: ${data.release_date}`);
+  utils.createElemAndAppend("p", "card-text", $cardBody).text(data.overview);
 }
 
 function tv($card, data) {
-  const $cardBody = createElemAndAppend("div", "card-body", $card);
-  createElemAndAppend("h5", "card-title", $cardBody).text(data.name);
-  createElemAndAppend("p", "card-subtitle", $cardBody).text(
-    `First aired: ${data.first_air_date}`
-  );
-  createElemAndAppend("p", "card-text", $cardBody).text(data.overview);
+  const $cardBody = utils.createElemAndAppend("div", "card-body", $card);
+  utils.createElemAndAppend("h5", "card-title", $cardBody).text(data.name);
+  utils
+    .createElemAndAppend("p", "card-subtitle", $cardBody)
+    .text(`First aired: ${data.first_air_date}`);
+  utils.createElemAndAppend("p", "card-text", $cardBody).text(data.overview);
 }
 
 function actor($card, data) {
-  const $cardBody = createElemAndAppend("div", "card-body", $card);
-  createElemAndAppend("h5", "card-title", $cardBody).text(data.name);
-  createElemAndAppend("h5", "card-subtitle", $cardBody).text(
-    `Known for: ${data.known_for_department}`
-  );
+  const $cardBody = utils.createElemAndAppend("div", "card-body", $card);
+  utils.createElemAndAppend("h5", "card-title", $cardBody).text(data.name);
+  utils
+    .createElemAndAppend("h5", "card-subtitle", $cardBody)
+    .text(`Known for: ${data.known_for_department}`);
 
   for (let i = 0; i < data.known_for.length; i++) {
     const item = data.known_for[i];
     const mediaType = item.media_type === "tv" ? "TV" : "Movie";
     const titleOrName = item.media_type === "tv" ? item.name : item.title;
-    createElemAndAppend("p", "card-text", $cardBody).text(
-      `${mediaType}: ${titleOrName}`
-    );
+    utils
+      .createElemAndAppend("p", "card-text", $cardBody)
+      .text(`${mediaType}: ${titleOrName}`);
   }
 }

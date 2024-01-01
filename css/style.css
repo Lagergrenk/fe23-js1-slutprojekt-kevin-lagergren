@@ -73,7 +73,7 @@
   width: 100%;
 }
 
-.main__actor-list,
+.main__person-list,
 .main__movie-list,
 .main__tv-list {
   display: flex;
@@ -97,7 +97,7 @@
 
 .card:hover,
 .main__movie-results:hover,
-.main__actor-results:hover,
+.main__person-results:hover,
 .main__tv-results:hover {
   transform: scale(1.05);
 }
@@ -148,7 +148,7 @@
 }
 
 .main__movie-results,
-.main__actor-results,
+.main__person-results,
 .main__tv-results {
   margin: 20px;
   padding: 15px;
@@ -156,17 +156,19 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #f8f8f8;
+  cursor: pointer;
 }
 
 .main__title {
   font-size: 1.5em;
   color: #333;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /* Style for the lists */
 .main__movie-list,
-.main__actor-list,
+.main__person-list,
 .main__tv-list {
   display: flex;
   flex-wrap: wrap;
@@ -175,7 +177,7 @@
 }
 
 .main__movie-total,
-.main__actor-total,
+.main__person-total,
 .main__tv-total {
   font-size: 1em;
   color: #666;

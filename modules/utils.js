@@ -19,3 +19,9 @@ export function createElemAndAppend(tag, className, parentSelector) {
   $(parentSelector).append($el);
   return $el;
 }
+
+export function isPopulatedArray(arr) {
+  if (arr.length > 0) {
+    return true;
+  }
+}
