@@ -1,5 +1,4 @@
 import * as utils from "./utils.js";
-// Error handler
 //Todo: Add error handling for the api calls
 export function errorHandler(statusCode, $parentSelector) {
   switch (statusCode) {

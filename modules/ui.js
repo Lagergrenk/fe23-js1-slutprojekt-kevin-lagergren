@@ -61,7 +61,6 @@ export function displaySearchResults(movies, persons, tv) {
 }
 
 //------------------ Helper functions ------------------//
-
 function displayCategoryResults(title, categoryName, data, $parentElement) {
   if (!utils.isPopulatedArray(data)) {
     return;

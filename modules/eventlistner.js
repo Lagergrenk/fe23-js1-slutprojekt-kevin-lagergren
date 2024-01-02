@@ -31,8 +31,7 @@ export function setupSearch() {
   });
 }
 
-// "buttons" works as a selector for the buttons that should be clicked
-// Todo: Add functionality to the buttons
+// Display the list of items in cards in the main content
 export function setupList(clickedBtn) {
   $(clickedBtn).click(async function () {
     const type = $(this).data("type");
