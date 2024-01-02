@@ -32,7 +32,7 @@ export function displayItemList(
   }
 
   slicedItems.forEach((item) => {
-    const $card = utils.createCardAndAppend($itemList, item, type, IMAGE_URL);
+    const $card = utils.createCardAndAppend($itemList, item, type);
     const $cardImg = $card.find(".card-img-top");
     MovieTvOrPerson($card, $cardImg, item, type, IMAGE_URL);
   });
@@ -46,7 +46,7 @@ export function displaySearchResults(movies, persons, tv) {
     !utils.isPopulatedArray(persons) &&
     !utils.isPopulatedArray(tv)
   ) {
-    errorMessage("No results found", ".main__content");
+    errorMessage("No results found", $mainContent);
     return;
   }
   const $searchResults = utils.createElemAndAppend(
@@ -90,7 +90,7 @@ function MovieTvOrPerson($card, $cardImg, data, type, imgPath) {
       $cardImg.attr("alt", data.title || data.name);
       break;
     case "person":
-      actor($card, data);
+      person($card, data);
       $cardImg.attr("src", `${imgPath}/${data.profile_path}`);
       $cardImg.attr("alt", data.name);
       break;
@@ -114,7 +114,7 @@ function tv($card, data) {
   utils.createElemAndAppend("p", "card-text", $cardBody).text(data.overview);
 }
 
-function actor($card, data) {
+function person($card, data) {
   const $cardBody = utils.createElemAndAppend("div", "card-body", $card);
   utils.createElemAndAppend("h5", "card-title", $cardBody).text(data.name);
   utils

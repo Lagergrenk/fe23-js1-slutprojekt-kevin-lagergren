@@ -3,34 +3,41 @@ import * as ui from "./ui.js";
 import { isInputValid } from "./validator.js";
 import { errorHandler, errorMessage } from "./errorhandler.js";
 
-// Search for movies, persons and tv-shows
+// Search for movies, persons, and tv-shows
 export function setupSearch() {
-  $(".main__search-button").click(async function () {
-    const searchInput = $(".main__search-input").val();
+  $(".main__search-button").click(function () {
+    const searchInput = $(".main__search-input").val().trim();
+    console.log(searchInput);
+
     if (!isInputValid(searchInput)) {
       errorMessage("Please enter a search term", ".main__search-results");
       return;
     }
-    try {
-      const movies = await api.getSearch("movie", searchInput);
-      const person = await api.getSearch("person", searchInput);
-      const tv = await api.getSearch("tv", searchInput);
-      ui.displaySearchResults(movies, person, tv);
-      $(".main__movie-results").click(() =>
-        ui.displayItemList(movies, "movie", ".main__content", "movie")
-      );
-      $(".main__person-results").click(() =>
-        ui.displayItemList(person, "person", ".main__content", "person")
-      );
-      $(".main__tv-results").click(() =>
-        ui.displayItemList(tv, "tv", ".main__content", "tv")
-      );
-    } catch (error) {
-      errorHandler(error.status_code, ".main__search-results");
-    }
+
+    fetchData(searchInput);
   });
 }
 
+async function fetchData(searchInput) {
+  try {
+    const movies = await api.getSearch("movie", searchInput);
+    const person = await api.getSearch("person", searchInput);
+    const tv = await api.getSearch("tv", searchInput);
+    ui.displaySearchResults(movies, person, tv);
+
+    $(".main__movie-results").click(() =>
+      ui.displayItemList(movies, "movie", ".main__content", "movie")
+    );
+    $(".main__person-results").click(() =>
+      ui.displayItemList(person, "person", ".main__content", "person")
+    );
+    $(".main__tv-results").click(() =>
+      ui.displayItemList(tv, "tv", ".main__content", "tv")
+    );
+  } catch (error) {
+    errorHandler(error.status_code, ".main__search-results");
+  }
+}
 // Display the list of items in cards in the main content
 export function setupList(clickedBtn) {
   $(clickedBtn).click(async function () {

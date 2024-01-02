@@ -13,13 +13,16 @@ async function getDataFromApi(endpoint) {
   try {
     const response = await fetch(url);
     console.log(response);
-    if (!response.ok) {
-      return;
+    if (response.ok) {
+      const data = await response.json();
+      return data.results;
+    } else if (response.status === 404) {
+      throw 404;
+    } else {
+      throw "error";
     }
-    const data = await response.json();
-    return data.results;
   } catch (error) {
-    errorHandler(error.status_code || 500, ".main__content");
+    errorHandler(error || 500, ".main__content");
   }
 }
 

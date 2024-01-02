@@ -15,7 +15,6 @@ export function errorHandler(statusCode, $parentSelector) {
 }
 
 export function errorMessage(message, $parentSelector) {
-  $(`${$parentSelector}`).empty();
   const $errorMessage = utils.createElemAndAppend(
     "div",
     "error-message",

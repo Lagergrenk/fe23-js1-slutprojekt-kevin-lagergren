@@ -1,5 +1,5 @@
 // Create a card and append it to the parentSelector
-export function createCardAndAppend(parentSelector, data, type, imgPath) {
+export function createCardAndAppend(parentSelector, data, type) {
   const $parent = $(parentSelector);
   const $card = createElemAndAppend("div", "card", $parent);
 
