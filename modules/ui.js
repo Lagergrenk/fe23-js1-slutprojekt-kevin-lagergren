@@ -17,8 +17,9 @@ export function displayItemList(
 ) {
   const $parent = $(parentSelector);
   $parent.empty();
-  const $title = utils.createElemAndAppend("h2", "main__title", $parent);
+
   if (title) {
+    const $title = utils.createElemAndAppend("h2", "main__title", $parent);
     $title.text(title);
   }
   const $itemList = utils.createElemAndAppend(
@@ -78,20 +79,34 @@ function displayCategoryResults(title, categoryName, data, $parentElement) {
 
 //Checks if the item is a movie, tv or person and calls the appropriate helper-function
 function MovieTvOrPerson($card, $cardImg, data, type, imgPath) {
+  const placeHolder = "https://via.placeholder.com/300x400?text=No+image+found";
+  let imagePath;
+
   switch (type) {
     case "movie":
       movie($card, data);
-      $cardImg.attr("src", `${IMAGE_URL}/${imgPath}/${data.poster_path}`);
+      imagePath = data.poster_path
+        ? `${IMAGE_URL}/${imgPath}/${data.poster_path}`
+        : placeHolder;
+      $cardImg.attr("src", imagePath);
       $cardImg.attr("alt", data.title || data.name);
       break;
+
     case "tv":
       tv($card, data);
-      $cardImg.attr("src", `${imgPath}/${data.poster_path}`);
+      imagePath = data.poster_path
+        ? `${imgPath}/${data.poster_path}`
+        : placeHolder;
+      $cardImg.attr("src", imagePath);
       $cardImg.attr("alt", data.title || data.name);
       break;
+
     case "person":
       person($card, data);
-      $cardImg.attr("src", `${imgPath}/${data.profile_path}`);
+      imagePath = data.profile_path
+        ? `${imgPath}/${data.profile_path}`
+        : placeHolder;
+      $cardImg.attr("src", imagePath);
       $cardImg.attr("alt", data.name);
       break;
   }

@@ -15,11 +15,20 @@ export function errorHandler(statusCode, $parentSelector) {
 }
 
 export function errorMessage(message, $parentSelector) {
-  const $errorMessage = utils.createElemAndAppend(
-    "div",
-    "error-message",
-    $parentSelector
-  );
-  utils.createElemAndAppend("h1", "error-message__text", $errorMessage);
-  $(".error-message__text").text(message);
+  const $parent = $($parentSelector);
+  $parent.empty();
+  console.log(message);
+  let $errorMessage = $($parentSelector).find(".error-message");
+
+  if ($errorMessage.length === 0) {
+    $errorMessage = utils.createElemAndAppend(
+      "div",
+      "error-message",
+      $parentSelector
+    );
+    utils.createElemAndAppend("h1", "error-message__text", $errorMessage);
+  } else {
+    $errorMessage.find(".error-message__text").empty();
+  }
+  $errorMessage.find(".error-message__text").text(message);
 }
