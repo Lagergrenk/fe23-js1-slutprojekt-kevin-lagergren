@@ -1,11 +1,16 @@
-import { showSublist, hideSublist } from "./ui.js";
 import * as api from "./api.js";
 import * as ui from "./ui.js";
+import { isInputValid } from "./validator.js";
+import { errorHandler, errorMessage } from "./errorhandler.js";
 
 // Search for movies, persons and tv-shows
 export function setupSearch() {
   $(".main__search-button").click(async function () {
     const searchInput = $(".main__search-input").val();
+    if (!isInputValid(searchInput)) {
+      errorMessage("Please enter a search term", ".main__search-results");
+      return;
+    }
     try {
       const movies = await api.getSearch("movie", searchInput);
       const person = await api.getSearch("person", searchInput);
@@ -21,7 +26,7 @@ export function setupSearch() {
         ui.displayItemList(tv, "tv", ".main__content", "tv")
       );
     } catch (error) {
-      console.log(error);
+      errorHandler(error.status_code, ".main__search-results");
     }
   });
 }
@@ -40,7 +45,8 @@ export function setupList(clickedBtn) {
             "movie",
             ".main__content",
             "movie",
-            "Popular Movies"
+            "Popular Movies",
+            true
           );
           break;
         case "popular-persons":
@@ -50,7 +56,8 @@ export function setupList(clickedBtn) {
             "person",
             ".main__content",
             "person",
-            "Popular Persons"
+            "Popular Persons",
+            true
           );
           break;
         case "popular-tvshows":
@@ -60,7 +67,8 @@ export function setupList(clickedBtn) {
             "tv",
             ".main__content",
             "tv",
-            "Popular Tv-Shows"
+            "Popular Tv-Shows",
+            true
           );
           break;
         case "top-rated-movies":
@@ -85,7 +93,7 @@ export function setupList(clickedBtn) {
           break;
       }
     } catch (error) {
-      console.log(error);
+      errorHandler(error.status_code, ".main__content");
     }
   });
 }

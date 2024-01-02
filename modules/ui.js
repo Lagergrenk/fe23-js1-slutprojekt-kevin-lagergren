@@ -1,31 +1,20 @@
-/*
-TODO:
-  - if the user clicks on a movie/tv show/person, display the details of that item or list of items
-  - if any results are lenght 0, do not display section of that type
-  - if any results are undefined, do not display section of that type
-  - create  function for displaying the details of 1 item. more indepth than the card
-  
-
- */
-
 import * as utils from "./utils.js";
+import { errorMessage } from "./errorhandler.js";
 
 //Global Variables
 const $mainContent = $(".main__content");
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
-export function showSublist(elem) {
-  elem.removeClass("nav__sublist");
-  elem.addClass("nav__sublist--hover-visible");
-}
-
-export function hideSublist(elem) {
-  elem.addClass("nav__sublist");
-  elem.removeClass("nav__sublist--hover-visible");
-}
 // Display the list of items in cards in the main content
 // items: array of items to display
-export function displayItemList(items, itemType, parentSelector, type, title) {
+export function displayItemList(
+  items,
+  itemType,
+  parentSelector,
+  type,
+  title,
+  slice
+) {
   const $parent = $(parentSelector);
   $parent.empty();
   const $title = utils.createElemAndAppend("h2", "main__title", $parent);
@@ -37,7 +26,11 @@ export function displayItemList(items, itemType, parentSelector, type, title) {
     `main__${itemType}-list`,
     parentSelector
   );
-  const slicedItems = items.slice(0, 10);
+  let slicedItems = items;
+  if (slice) {
+    slicedItems = items.slice(0, 10);
+  }
+
   slicedItems.forEach((item) => {
     const $card = utils.createCardAndAppend($itemList, item, type, IMAGE_URL);
     const $cardImg = $card.find(".card-img-top");
@@ -47,18 +40,15 @@ export function displayItemList(items, itemType, parentSelector, type, title) {
 
 export function displaySearchResults(movies, persons, tv) {
   $mainContent.empty();
-
+  console.log(movies, persons, tv);
   if (
     !utils.isPopulatedArray(movies) &&
     !utils.isPopulatedArray(persons) &&
     !utils.isPopulatedArray(tv)
   ) {
-    utils
-      .createElemAndAppend("h2", "main__title", $mainContent)
-      .text("No results found");
+    errorMessage("No results found", ".main__content");
     return;
   }
-
   const $searchResults = utils.createElemAndAppend(
     "div",
     "main__search-results",
@@ -76,13 +66,11 @@ function displayCategoryResults(title, categoryName, data, $parentElement) {
   if (!utils.isPopulatedArray(data)) {
     return;
   }
-
   const categoryResults = utils.createElemAndAppend(
     "div",
     `main__${categoryName}-results`,
     $parentElement
   );
-
   utils.createElemAndAppend("h2", "main__title", categoryResults).text(title);
   utils
     .createElemAndAppend("div", `main__${categoryName}-total`, categoryResults)

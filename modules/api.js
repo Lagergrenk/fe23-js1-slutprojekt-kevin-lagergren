@@ -1,3 +1,5 @@
+import { errorHandler } from "./errorhandler.js";
+
 const API_KEY = "02cd657ef46d092540aae7a2718a06fa";
 const API_URL = "https://api.themoviedb.org/3";
 
@@ -8,17 +10,17 @@ async function getDataFromApi(endpoint) {
   const url = `${API_URL}/${endpoint}${
     hasQueryParams ? "&" : "?"
   }api_key=${API_KEY}`;
-
-  const response = await fetch(url);
-  if (!response.ok) {
-    // Todo: Implement error handling
-    throw new Error(response.statusText);
+  try {
+    const response = await fetch(url);
+    console.log(response);
+    if (!response.ok) {
+      return;
+    }
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    errorHandler(error.status_code || 500, ".main__content");
   }
-  if (response.ok && response.status === 404) {
-    //todo: Implement error handling for 404 not found
-  }
-  const data = await response.json();
-  return data.results;
 }
 
 // Get functions
