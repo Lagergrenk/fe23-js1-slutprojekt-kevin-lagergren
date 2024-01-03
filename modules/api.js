@@ -21,7 +21,7 @@ async function getDataFromApi(endpoint) {
       throw "error";
     }
   } catch (error) {
-    errorHandler(error || 500, ".main__content");
+    errorHandler(error, $(".main__content"));
   }
 }
 

@@ -7,14 +7,7 @@ const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
 // Display the list of items in cards in the main content
 // items: array of items to display
-export function displayItemList(
-  items,
-  itemType,
-  $parentSelector,
-  type,
-  title,
-  slice
-) {
+export function displayItemList(items, $parentSelector, type, title, slice) {
   if (title) {
     const $title = utils.createElemAndAppend(
       "h2",
@@ -26,7 +19,7 @@ export function displayItemList(
   $parentSelector.empty();
   const $itemList = utils.createElemAndAppend(
     "div",
-    `main__${itemType}-list`,
+    `main__${type}-list`,
     $parentSelector
   );
   let slicedItems = items;
