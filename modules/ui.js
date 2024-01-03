@@ -10,22 +10,24 @@ const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 export function displayItemList(
   items,
   itemType,
-  parentSelector,
+  $parentSelector,
   type,
   title,
   slice
 ) {
-  const $parent = $(parentSelector);
-  $parent.empty();
-
   if (title) {
-    const $title = utils.createElemAndAppend("h2", "main__title", $parent);
+    const $title = utils.createElemAndAppend(
+      "h2",
+      "main__title",
+      $parentSelector
+    );
     $title.text(title);
   }
+  $parentSelector.empty();
   const $itemList = utils.createElemAndAppend(
     "div",
     `main__${itemType}-list`,
-    parentSelector
+    $parentSelector
   );
   let slicedItems = items;
   if (slice) {
@@ -41,7 +43,6 @@ export function displayItemList(
 
 export function displaySearchResults(movies, persons, tv) {
   $mainContent.empty();
-  console.log(movies, persons, tv);
   if (
     !utils.isPopulatedArray(movies) &&
     !utils.isPopulatedArray(persons) &&

@@ -12,7 +12,6 @@ async function getDataFromApi(endpoint) {
   }api_key=${API_KEY}`;
   try {
     const response = await fetch(url);
-    console.log(response);
     if (response.ok) {
       const data = await response.json();
       return data.results;

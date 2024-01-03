@@ -4,16 +4,15 @@ import { isInputValid } from "./validator.js";
 import { errorHandler, errorMessage } from "./errorhandler.js";
 
 //global variables
-const mainContent = ".main__content";
+const $mainContent = $(".main__content");
 
 // Search for movies, persons, and tv-shows
 export function setupSearch() {
   $(".main__search-button").click(function () {
     const searchInput = $(".main__search-input").val();
-    console.log(searchInput);
 
     if (!isInputValid(searchInput)) {
-      errorMessage("Please enter a search term", `${mainContent}`);
+      errorMessage("Please enter a search term", $mainContent);
       return;
     }
 
@@ -29,16 +28,16 @@ async function fetchData(searchInput) {
     ui.displaySearchResults(movies, person, tv);
 
     $(".main__movie-results").click(() =>
-      ui.displayItemList(movies, "movie", `${mainContent}`, "movie")
+      ui.displayItemList(movies, "movie", $mainContent, "movie")
     );
     $(".main__person-results").click(() =>
-      ui.displayItemList(person, "person", `${mainContent}`, "person")
+      ui.displayItemList(person, "person", $mainContent, "person")
     );
     $(".main__tv-results").click(() =>
-      ui.displayItemList(tv, "tv", `${mainContent}`, "tv")
+      ui.displayItemList(tv, "tv", $mainContent, "tv")
     );
   } catch (error) {
-    errorHandler(error.status_code, `${mainContent}`);
+    errorHandler(error.status_code, $mainContent);
   }
 }
 // Display the list of items in cards in the main content
@@ -52,7 +51,7 @@ export function setupList(clickedBtn) {
           ui.displayItemList(
             movies,
             "movie",
-            `${mainContent}`,
+            $mainContent,
             "movie",
             "Popular Movies",
             true
@@ -63,7 +62,7 @@ export function setupList(clickedBtn) {
           ui.displayItemList(
             persons,
             "person",
-            `${mainContent}`,
+            $mainContent,
             "person",
             "Popular Persons",
             true
@@ -74,7 +73,7 @@ export function setupList(clickedBtn) {
           ui.displayItemList(
             tvshows,
             "tv",
-            `${mainContent}`,
+            $mainContent,
             "tv",
             "Popular Tv-Shows",
             true
@@ -85,7 +84,7 @@ export function setupList(clickedBtn) {
           ui.displayItemList(
             topRatedMovies,
             "movie",
-            `${mainContent}`,
+            $mainContent,
             "movie",
             "Top Rated Movies"
           );
@@ -95,14 +94,14 @@ export function setupList(clickedBtn) {
           ui.displayItemList(
             topRatedTvshows,
             "tv",
-            `${mainContent}`,
+            $mainContent,
             "tv",
             "Top Rated Tv-Shows"
           );
           break;
       }
     } catch (error) {
-      errorHandler(error.status_code, `${$mainContent}`);
+      errorHandler(error.status_code, $mainContent);
     }
   });
 }

@@ -15,9 +15,7 @@ export function errorHandler(statusCode, $parentSelector) {
 }
 
 export function errorMessage(message, $parentSelector) {
-  const $parent = $($parentSelector);
-  $parent.empty();
-  console.log(message);
+  $parentSelector.empty();
   let $errorMessage = $($parentSelector).find(".error-message");
 
   if ($errorMessage.length === 0) {
