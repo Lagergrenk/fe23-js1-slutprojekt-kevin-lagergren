@@ -3,7 +3,6 @@ import { errorHandler } from "./errorhandler.js";
 const API_KEY = "02cd657ef46d092540aae7a2718a06fa";
 const API_URL = "https://api.themoviedb.org/3";
 
-// Todo: Add Error handling from error handler
 async function getDataFromApi(endpoint) {
   // Determine if the endpoint already has a query parameter
   const hasQueryParams = endpoint.includes("?");

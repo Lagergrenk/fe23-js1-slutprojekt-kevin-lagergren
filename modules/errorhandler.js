@@ -1,5 +1,5 @@
 import * as utils from "./utils.js";
-//Todo: Add error handling for the api calls
+
 export function errorHandler(statusCode, $parentSelector) {
   switch (statusCode) {
     case 404:
@@ -9,7 +9,10 @@ export function errorHandler(statusCode, $parentSelector) {
       errorMessage("Server error", $parentSelector);
       break;
     default:
-      errorMessage("Something went wrong", $parentSelector);
+      errorMessage(
+        "Something went wrong, please try again later",
+        $parentSelector
+      );
       break;
   }
 }
@@ -18,6 +21,7 @@ export function errorMessage(message, $parentSelector) {
   $parentSelector.empty();
   let $errorMessage = $($parentSelector).find(".error-message");
 
+  // If the error message doesn't exist, create it
   if ($errorMessage.length === 0) {
     $errorMessage = utils.createElemAndAppend(
       "div",
