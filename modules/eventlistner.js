@@ -7,17 +7,30 @@ import { errorHandler, errorMessage } from "./errorhandler.js";
 const $mainContent = $(".main__content");
 
 // Search for movies, persons, and tv-shows
-export function setupSearch() {
+export function setupSearchClick() {
   $(".main__search-button").click(function () {
-    const searchInput = $(".main__search-input").val();
-
-    if (!isInputValid(searchInput)) {
-      errorMessage("Please enter a search term", $mainContent);
-      return;
-    }
-
-    fetchData(searchInput);
+    performSearch();
   });
+}
+
+export function setupSearchEnter() {
+  $(".main__search-input").keypress(function (e) {
+    if (e.which == 13) {
+      e.preventDefault(); // Prevent the default form submission behavior
+      performSearch();
+    }
+  });
+}
+
+function performSearch() {
+  const searchInput = $(".main__search-input").val();
+
+  if (!isInputValid(searchInput)) {
+    errorMessage("Please enter a search term", $mainContent);
+    return;
+  }
+
+  fetchData(searchInput);
 }
 
 async function fetchData(searchInput) {
