@@ -33,7 +33,7 @@ export function displayItemList(items, $parentSelector, type, title, slice) {
     MovieTvOrPerson($card, $cardImg, item, type, IMAGE_URL);
   });
 }
-
+// Display the search results in the main content
 export function displaySearchResults(movies, persons, tv) {
   $mainContent.empty();
   if (
