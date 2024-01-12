@@ -16,7 +16,7 @@ export function setupSearchClick() {
 export function setupSearchEnter() {
   $(".main__search-input").keypress(function (e) {
     if (e.which == 13) {
-      e.preventDefault(); // Prevent the default form submission behavior
+      e.preventDefault();
       performSearch();
     }
   });
