@@ -2,7 +2,6 @@ import * as eventlistner from "./eventlistner.js";
 
 // Initialize the app
 $(document).ready(function () {
-  eventlistner.setupSearchClick();
-  eventlistner.setupSearchEnter();
+  eventlistner.setupSearchEvents();
   eventlistner.setupList(".nav__subitem");
 });

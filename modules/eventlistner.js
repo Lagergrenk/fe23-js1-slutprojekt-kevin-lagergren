@@ -7,15 +7,11 @@ import { errorHandler, errorMessage } from "./errorhandler.js";
 const $mainContent = $(".main__content");
 
 // Search for movies, persons, and tv-shows
-export function setupSearchClick() {
-  $(".main__search-button").click(function () {
-    performSearch();
-  });
-}
-
-export function setupSearchEnter() {
+export function setupSearchEvents() {
+  $(".main__search-button").click(performSearch);
   $(".main__search-input").keypress(function (e) {
     if (e.which == 13) {
+      // 13 = enter key
       e.preventDefault();
       performSearch();
     }
